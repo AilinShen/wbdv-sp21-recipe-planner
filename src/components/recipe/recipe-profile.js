@@ -5,7 +5,7 @@ import Directions from "./directions";
 import Reviews from "./reviews";
 import Favorite from "./favorite";
 import { connect } from "react-redux";
-import {Link, useParams} from "react-router-dom";
+import {Link, useParams, useHistory} from "react-router-dom";
 
 import recipeService from "../../services/recipe-service";
 import cartService from "../../services/cart-service";
@@ -19,6 +19,7 @@ const RecipeProfile = ({ recipe = [],
                            findRecipeById,
                            findLocalRecipeById}) => {
   const { recipeId } = useParams();
+  let history = useHistory();
 
   const [isDbRecipe, setIsDbRecipe] = useState(false);
   const [addCart, setAddCart] = useState(false);
@@ -71,7 +72,8 @@ const RecipeProfile = ({ recipe = [],
             alert("Successfully added the item from your cart.")
         }
     }else{
-      alert("Please Log In First!")
+      alert("Please Log In First!");
+      history.push("/login")
     }
     
   }
